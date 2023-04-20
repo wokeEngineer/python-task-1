@@ -16,17 +16,24 @@ list_2 = [
     },
 ]
 
-
 def merge_lists(list_1, list_2) -> list:
+    
     """
-    Complete this function, by merging the information from list_1 and list_2
-    to create a new list, which has all the information about each student from
-    both lists in one single dict.
-
-    - Both lists are unsorted
-    - Both lists can have missing values (for ex list_2 has missing id=2)
+    Since the only common identifier in each object is the 'id', we use it to create
+    a unique map of objects for every 'id'. If we do not have any object corresponding
+    to that 'id', we add it as a value to that key, otherwise, if an object is present, 
+    we will update it with the new changes.
+    
+    Finally we return a list of values of that dict
     """
-    # return list_3
-
-
+    
+    merged_list = {}
+    for object in list_1 + list_2:
+        if object['id'] not in merged_list:
+            merged_list[object['id']] = object
+        else:
+            merged_list[object['id']].update(object)
+        
+    return list(merged_list.values())
+        
 list_3 = merge_lists(list_1, list_2)
